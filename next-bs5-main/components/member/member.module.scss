@@ -1,0 +1,146 @@
+.main-title {
+  width: 200px;
+  height: auto;
+}
+
+@media (max-width: 992px) {
+  .main-title {
+    width: 170px;
+  }
+}
+
+.loginsignin {
+  background-color: #003e52;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* 為了字體平滑設計 */
+  /* -webkit-font-smoothing: antialiased;
+    font-family: "B2Hana", sans-serif;
+    font-weight: 500; */
+}
+
+// .googlelogo {
+//   width: 20px;
+//   height: 20px;
+//   margin-right: 8px;
+// }
+
+.signinsec1 {
+  .gfast {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: none;
+    text-decoration: none;
+
+    p {
+      color: #000;
+    }
+
+    &:hover {
+      transition: 0.5s;
+      background-color: hsl(0, 0%, 90%);
+    }
+  }
+
+  .btn-no-radius {
+    border-radius: 0;
+  }
+}
+
+.signinsec2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--bg-text-color);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+
+    input {
+      margin: 12px 0px 24px 0px;
+      height: 50px;
+      width: 500px;
+      padding: 1.2rem;
+      color: var(--bg-text-color);
+      background-color: var(--background);
+      border: var(--primary2) solid 1px;
+      font-size: 1.6rem;
+      /* 懸停指示 */
+      caret-color: var(--bg-text-color);
+      /* 讓文字從1rem後開始(首行縮排) */
+      text-indent: 0.2rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input::placeholder {
+      color: var(--primary2);
+    }
+
+    label {
+      font-size: 1.6rem;
+      /* font-family: "B2Hana-Regular", sans-serif; */
+    }
+
+    .btn-in {
+      width: 300px;
+      background-color: var(--primary2);
+      font-size: 1.6rem;
+      border: none;
+      font-family: 'B2Hana-Regular', sans-serif;
+      padding: 1.1rem;
+      color: var(--bg-text-color);
+    }
+
+    .btn-in:hover {
+      background-color: var(--button-hover-color);
+    }
+  }
+
+  .form-footer {
+    font-size: 1.6rem;
+
+    a {
+      color: rgb(178, 149, 100);
+      font-family: 'B2Hana-Regular', sans-serif;
+      font-size: 1.6rem;
+
+      &:hover {
+        color: var(--button-hover-color);
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .loginsignin {
+    .orline {
+      width: 100%;
+    }
+  }
+
+  .signinsec1 {
+    .gfast {
+      width: 330px;
+    }
+  }
+
+  .signinsec2 {
+    form {
+      input {
+        width: 100%;
+      }
+    }
+  }
+}

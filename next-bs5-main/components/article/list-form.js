@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo} from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/components/article/list.module.scss'
 import option from '@/components/article/option.module.sass'
@@ -25,11 +25,14 @@ export default function ListForm() {
     console.log(apiUrl);
     const res = await fetch(apiUrl)
     const data = await res.json()
-    const sortedArticles = sortArticles(data.data.articles, sortOrder) // 新增
+    const sortedArticles = sortArticles(data.data.articles, sortOrder)
     setArticles(sortedArticles)
+    // console.log(sortedArticles);
     // setArticles(data.data.articles)
   }
   // console.log(articles);
+
+  
 
   const getCategories = async () => {
     const apiUrl = 'http://localhost:3005/api/my-articles/category'
@@ -85,6 +88,7 @@ export default function ListForm() {
     switch (sortOrder) {
       case 'date_desc': // 發布日期:由新到舊
         return articles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        // return [articles].sort((a, b) => b.id - a.id)
       case 'date_asc': // 發布日期:由舊到新
         return articles.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
       case 'views_desc': // 觀看次數:由高到低
@@ -98,6 +102,8 @@ export default function ListForm() {
   const handleSortChange = (event) => {
     event.preventDefault()
     const value = event.target.dataset.value
+    if (sortOrder === value) return;
+    console.log('Selected sort order:', value);
     setSortOrder(value)
   }
   useEffect(() => {
@@ -166,10 +172,17 @@ export default function ListForm() {
 
   useEffect(() => {
     const sortedArticles = sortArticles(articles, sortOrder);
+    console.log(sortedArticles); // 正常的作用
     setArticles(sortedArticles);
   }, [sortOrder, articles]);
 
-
+  const sortedArticles = useMemo(() => {
+    return sortArticles([...articles], sortOrder);
+  }, [articles, sortOrder]);
+  
+  useEffect(() => {
+    console.log(sortedArticles); // 用於調試
+  }, [sortedArticles]);
 
   return (
     <>
@@ -209,7 +222,7 @@ export default function ListForm() {
             </div>
           </div>
           <div className={`row row-cols-1 row-cols-md-2 row-cols-lg-3  my-4 g-5 mx-0 ${styles['articlelist']}`}>
-            {articles.map((article) => (
+            {sortedArticles.map((article) => (
               <div className="col" key={article.id}>
                 <Link href={`/article/detail/${article.id}`} className={`${styles['articleLink']}`}>
                   <div className={`${styles['articlecard']}`}>

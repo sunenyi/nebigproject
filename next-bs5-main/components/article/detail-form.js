@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react'
 import StarLarge from '@/components/star/star-large'
 import { IoEyeSharp } from 'react-icons/io5'
-import { FaRegComment, FaBookmark, FaRegBookmark, FaSearch } from 'react-icons/fa'
+import {
+  FaRegComment,
+  FaBookmark,
+  FaRegBookmark,
+  FaSearch,
+} from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 export default function DetailForm() {
   const router = useRouter()
-  const { id } = router.query; // 假設文章 ID 是通過路由傳遞的
+  const { id } = router.query // 假設文章 ID 是通過路由傳遞的
   const [article, setArticle] = useState([])
-  const [views, setViews] = useState(0);
+  const [views, setViews] = useState(0)
   const [categories, setCategories] = useState([])
   const [topArticles, setTopArticles] = useState([]) // 儲存前五篇熱門文章
   const [newArticles, setNewArticles] = useState([]) // 儲存前五篇最新文章
@@ -63,8 +68,6 @@ export default function DetailForm() {
     getNewArticles()
   }, [])
 
-
-
   return (
     <>
       <main className="articledetail">
@@ -75,13 +78,15 @@ export default function DetailForm() {
             <div className="col-lg-9 article-left pe-lg-3 mx-0 px-0">
               <div className="article_content py-4 mx-4">
                 <div className="article_head bd-b1">
-                  <h1 className="section-heading p-3">
-                    {article.title}
-                  </h1>
+                  <h1 className="section-heading p-3">{article.title}</h1>
                   <div className="mobile">
                     <div className="timeandnum d-flex align-items-center my-4 p-3">
-                    {/* 因為會有未加載完全，取不到值而報錯 */}
-                      <p className="p2 mb-0 me-4">{article.created_at ? article.created_at.split(' ')[0] : ''}</p>
+                      {/* 因為會有未加載完全，取不到值而報錯 */}
+                      <p className="p2 mb-0 me-4">
+                        {article.created_at
+                          ? article.created_at.split(' ')[0]
+                          : ''}
+                      </p>
                       <IoEyeSharp color="#ffffffa0" />
                       <p className="p2 mb-0 me-4 ms-2">{article.views}</p>
                       <FaRegComment color="#ffffffa0" />
@@ -101,9 +106,7 @@ export default function DetailForm() {
                 </div>
               </div>
               <div className="article-text bd-b1 p-3 mt-3 mx-4">
-                <p>
-                  {article.content}
-                </p>
+                <p>{article.content}</p>
               </div>
               <div className="recom-tea mt-3 p-3 bd-b1">
                 <h5 className="p-3">推薦好茶</h5>
@@ -231,12 +234,18 @@ export default function DetailForm() {
                             />
                           </div>
                           <div>
-                            <a className="mt-3 article_title"
-                              href={`/article/detail/${topArticle.id}`}>
+                            <a
+                              className="mt-3 article_title"
+                              href={`/article/detail/${topArticle.id}`}
+                            >
                               {topArticle.title}
                             </a>
                             <div className="d-flex timeandnum">
-                              <p className="p2 mb-0 me-3 py-2">{topArticle.created_at?topArticle.created_at.split(' ')[0]:''}</p>
+                              <p className="p2 mb-0 me-3 py-2">
+                                {topArticle.created_at
+                                  ? topArticle.created_at.split(' ')[0]
+                                  : ''}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -252,25 +261,29 @@ export default function DetailForm() {
                       </div>
                     </div>
                     <div className="new_article_group">
-                    {newArticles.map((newArticle)=>(
-                      <div key={newArticle.id} className="d-flex mt-4">
-                        <div className="me-4">
-                          <img
-                            className="mb-4"
-                            src="/images/article/articledetail/article_front.svg"
-                            alt=""
-                          />
-                        </div>
-                        <div>
-                          <a className="mt-3 article_title">
-                            {newArticle.title}
-                          </a>
-                          <div className="d-flex timeandnum">
-                            <p className="p2 mb-0 me-3 py-2">{newArticle.created_at?newArticle.created_at.split(' ')[0]:''}</p>
+                      {newArticles.map((newArticle) => (
+                        <div key={newArticle.id} className="d-flex mt-4">
+                          <div className="me-4">
+                            <img
+                              className="mb-4"
+                              src="/images/article/articledetail/article_front.svg"
+                              alt=""
+                            />
+                          </div>
+                          <div>
+                            <a className="mt-3 article_title">
+                              {newArticle.title}
+                            </a>
+                            <div className="d-flex timeandnum">
+                              <p className="p2 mb-0 me-3 py-2">
+                                {newArticle.created_at
+                                  ? newArticle.created_at.split(' ')[0]
+                                  : ''}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                     </div>
                   </div>
                 </div>

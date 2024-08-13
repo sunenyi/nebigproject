@@ -271,7 +271,10 @@ export default function DetailForm() {
                             />
                           </div>
                           <div>
-                            <a className="mt-3 article_title">
+                            <a
+                              className="mt-3 article_title"
+                              href={`/article/detail/${newArticle.id}`}
+                            >
                               {newArticle.title}
                             </a>
                             <div className="d-flex timeandnum">

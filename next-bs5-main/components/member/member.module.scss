@@ -59,14 +59,29 @@
   justify-content: center;
   color: var(--bg-text-color);
 
-  form {
+  .register-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
+    .error {
+      font-size: 1.6rem;
+      color: red;
+    }
+    .inputarea {
+      position: relative;
+      .icon {
+        padding: 0px;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        /*自己本身高度往上調50%*/
+      }
+    }
 
     input {
-      margin: 12px 0px 24px 0px;
+      margin: 12px 0px 12px 0px;
       height: 50px;
       width: 500px;
       padding: 1.2rem;
@@ -90,16 +105,17 @@
 
     label {
       font-size: 1.6rem;
-      /* font-family: "B2Hana-Regular", sans-serif; */
+      display: flex;
+      flex-direction: column;
     }
 
     .btn-in {
-      width: 300px;
+      width: 250px;
       background-color: var(--primary2);
       font-size: 1.6rem;
       border: none;
       font-family: 'B2Hana-Regular', sans-serif;
-      padding: 1.1rem;
+      padding: 1.3rem;
       color: var(--bg-text-color);
     }
 

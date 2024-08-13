@@ -46,7 +46,7 @@ export default function ListForm() {
     event.preventDefault()
     const { name, id } = category
     if (id === selectedCategoryId) return;
-    setArticles([])//讓圖片的路徑不會報錯
+    setArticles([])
     setSelectedCategory(name)
     setSelectedCategoryId(id)
 

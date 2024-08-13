@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './member.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
-import StarLarge from '@/components/star/star-large'
+import Star from '@/components/star/star'
 import GoogleLogo from '@/components/icons/google-logo'
 
 export default function LoginForm() {
@@ -17,18 +17,7 @@ export default function LoginForm() {
             alt="login"
           />
         </div>
-        <div className={`star-large mb-4"`}>
-          <Image src="/images/star.png" alt="" width={16} height={16} />
-          <img
-            src="/images/Vector 25.png"
-            alt=""
-            width="100%"
-            height="1.5px"
-            style={{ margin: '0 -2px' }}
-          />
-          <Image src="/images/star.png" alt="" width={16} height={16} />
-        </div>
-        <StarLarge />
+        <Star />
         <div className={`${styles['loginsignin']}`}>
           <div className={`${styles['signinsec1']} text-center mb-4 mt-4`}>
             <p className="mb-5">會員登入</p>
@@ -80,7 +69,7 @@ export default function LoginForm() {
                   'm-4 d-flex justify-content-center',
                 ].join(' ')}
               >
-                <button className={`${styles['btn-in']}`} type="submit">
+                <button className={`${styles['btn-in']} mt-4`} type="submit">
                   登入
                 </button>
               </div>

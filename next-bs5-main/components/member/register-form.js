@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import validator from 'validator'
 import styles from './member.module.scss'
 import Link from 'next/link'
 import Star from '@/components/star/star'
@@ -84,8 +85,21 @@ export default function RegisterForm() {
     if (!user.email) {
       newErrors.email = 'email為必填'
     }
-    if (!user.username) {
-      newErrors.username = '帳號為必填'
+    // 強密碼驗證
+    if (
+      !validator.isStrongPassword(user.password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 0,
+        minSymbols: 0,
+      })
+    ) {
+      newErrors.password =
+        '密碼為8到12個字元，且至少需包含一個英文大寫與一個英文小寫字元'
+    }
+    if (user.password.length > 12) {
+      newErrors.password = '密碼至多12個字元'
     }
 
     if (user.password !== user.confirmPassword) {
@@ -101,9 +115,9 @@ export default function RegisterForm() {
       newErrors.confirmPassword = '密碼確認為必填'
     }
 
-    if (!user.agree) {
-      newErrors.agree = '請先同意會員註冊條款'
-    }
+    // if (!user.agree) {
+    //   newErrors.agree = '請先同意會員註冊條款'
+    // }
 
     // 呈現錯誤訊息
     setErrors(newErrors)

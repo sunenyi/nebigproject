@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './member.module.scss'
 import Link from 'next/link'
+import Star from '@/components/star/star'
 import dynamic from 'next/dynamic'
 import GoogleLogo from '@/components/icons/google-logo'
 import Image from 'next/image'
@@ -43,9 +44,9 @@ export default function RegisterForm() {
     // 表示取反操作，也就是說，如果 showEye 為 false，取反後就會變成 true，因此會顯示 RiEyeLine 圖示。如果 showEye 為 true，取反後就會變成 false，顯示 RiEyeOffLine 圖示。
   }
   // 專門切換 confirm password 欄位的顯示狀態
-const handleConfirmPasswordIconClick = () => {
-  setShowConfirmPassword(!showConfirmPassword)
-}
+  const handleConfirmPasswordIconClick = () => {
+    setShowConfirmPassword(!showConfirmPassword)
+  }
 
   // 多欄位共用事件函式
   const handleFieldChange = (e) => {
@@ -128,20 +129,10 @@ const handleConfirmPasswordIconClick = () => {
             <img
               className={`${styles['main-title']}`}
               src="/images/main-title/signup.svg"
-              alt="login"
+              alt="register"
             />
           </div>
-          <div className={`star-large mb-4"`}>
-            <Image src="/images/star.png" alt="" width={16} height={16} />
-            <img
-              src="/images/Vector 25.png"
-              alt=""
-              width="100%"
-              height="1.5px"
-              style={{ margin: '0 -2px' }}
-            />
-            <Image src="/images/star.png" alt="" width={16} height={16} />
-          </div>
+          <Star />
           <div className={`${styles['loginsignin']}`}>
             <div className={`${styles['signinsec1']} text-center mb-4 mt-4`}>
               <p className="mb-5">註冊新帳號</p>

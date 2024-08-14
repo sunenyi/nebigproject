@@ -11,7 +11,8 @@ import '@/styles/article.scss'
 // 載入購物車context
 import { CartProvider } from '@/hooks/use-cart-state'
 // 載入認証用context
-import { AuthProvider } from '@/hooks/use-auth'
+// import { AuthProvider } from '@/hooks/use-auth'
+import { AuthProvider } from '@/context/AuthContext'
 // 載入動畫context
 import { LoaderProvider } from '@/hooks/use-loader'
 

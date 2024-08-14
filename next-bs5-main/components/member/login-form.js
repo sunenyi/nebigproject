@@ -7,24 +7,30 @@ import Star from '@/components/star/star'
 import GoogleLogo from '@/components/icons/google-logo'
 import { RiEyeLine } from 'react-icons/ri'
 import { RiEyeOffLine } from 'react-icons/ri'
+import useAuth from '@/hooks/useAuth'
 
 export default function LoginForm() {
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+
   const [user, setUser] = useState({
-    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    agree: false, // checkbox 同意會員註冊條款
+    // agree: false, // checkbox 同意會員註冊條款
   })
 
   // 錯誤訊息狀態
   const [errors, setErrors] = useState({
-    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    agree: '', // 錯誤訊息用字串
+    // agree: '', // 錯誤訊息用字串
   })
+  const { login } = useAuth()
+
+  const onLogin = () => {
+    console.log(user.email, user.password)
+    login(user.email, user.password)
+  }
 
   // checkbox 呈現密碼用
   const [showPassword, setShowPassword] = useState(false)
@@ -36,14 +42,10 @@ export default function LoginForm() {
     setShowPassword(!showPassword) // 切換圖示狀態
     // 表示取反操作，也就是說，如果 showEye 為 false，取反後就會變成 true，因此會顯示 RiEyeLine 圖示。如果 showEye 為 true，取反後就會變成 false，顯示 RiEyeOffLine 圖示。
   }
-  // 專門切換 confirm password 欄位的顯示狀態
-  const handleConfirmPasswordIconClick = () => {
-    setShowConfirmPassword(!showConfirmPassword)
-  }
 
   // 多欄位共用事件函式
   const handleFieldChange = (e) => {
-    console.log(e.target.name, e.target.value, e.target.type)
+    // console.log(e.target.name, e.target.value, e.target.type)
 
     if (e.target.name === 'agree') {
       setUser({ ...user, [e.target.name]: e.target.checked })
@@ -64,39 +66,20 @@ export default function LoginForm() {
     // 表單檢查 --- START
     // 建立一個新的錯誤物件
     const newErrors = {
-      name: '',
       email: '',
-      username: '',
       password: '',
-      confirmPassword: '',
     }
 
-    if (!user.name) {
-      newErrors.name = '姓名為必填'
-    }
     if (!user.email) {
       newErrors.email = 'email為必填'
-    }
-    if (!user.username) {
-      newErrors.username = '帳號為必填'
-    }
-
-    if (user.password !== user.confirmPassword) {
-      newErrors.password = '密碼與確認密碼需要一致'
-      newErrors.confirmPassword = '密碼與確認密碼需要一致'
     }
 
     if (!user.password) {
       newErrors.password = '密碼為必填'
     }
-
-    if (!user.confirmPassword) {
-      newErrors.confirmPassword = '密碼確認為必填'
-    }
-
-    if (!user.agree) {
-      newErrors.agree = '請先同意會員註冊條款'
-    }
+    // if (!user.agree) {
+    //   newErrors.agree = '請先同意會員註冊條款'
+    // }
 
     // 呈現錯誤訊息
     setErrors(newErrors)
@@ -191,43 +174,17 @@ export default function LoginForm() {
                 </div>
               </label>
               <span className={`${styles['error']}`}>{errors.password}</span>
-              <label className="mt-3">
-                密碼確認*
-                <div
-                  className={`${styles['inputarea']} "d-flex justify-between"`}
-                >
-                  <input
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    name="confirmPassword"
-                    value={user.confirmPassword}
-                    placeholder="再輸入一次密碼"
-                    onChange={handleFieldChange}
-                  />
-                  <div>
-                    {showConfirmPassword ? (
-                      <RiEyeLine
-                        className={styles['icon']}
-                        onClick={handleConfirmPasswordIconClick}
-                      />
-                    ) : (
-                      <RiEyeOffLine
-                        className={styles['icon']}
-                        onClick={handleConfirmPasswordIconClick}
-                      />
-                    )}
-                  </div>
-                </div>
-              </label>
-              <span className={`${styles['error']}`}>
-                {errors.confirmPassword}
-              </span>
               <div
                 className={[
                   styles['btn-div'],
                   'm-4 d-flex justify-content-center',
                 ].join(' ')}
               >
-                <button className={`${styles['btn-in']} mt-4`} type="submit">
+                <button
+                  className={`${styles['btn-in']} mt-4`}
+                  type="submit"
+                  onClick={onLogin}
+                >
                   登入
                 </button>
               </div>
